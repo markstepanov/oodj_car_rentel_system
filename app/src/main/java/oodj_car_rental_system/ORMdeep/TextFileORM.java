@@ -46,10 +46,6 @@ public class TextFileORM {
        for (TextDbTable table: dbTables){
           this.tableFileFetcher.addTextDbTable(table);
        }
-
-       for (TextDbTable table: tableFileFetcher.getImmutableDbTables()){
-           System.out.println(table.getFile().getAbsolutePath());
-       }
     }
 
 

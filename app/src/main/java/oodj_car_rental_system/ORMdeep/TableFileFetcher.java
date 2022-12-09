@@ -76,8 +76,6 @@ public class TableFileFetcher {
     private Optional<File> getFileIfExist(TextDbTable table) {
         File test = new File(this.pathToDbRepo, table.getName());
         File tableFile = new File("databases/" + table.getName());
-        System.out.println(test.getAbsoluteFile().getName());
-        System.out.println(tableFile.getAbsoluteFile().getName());
         if (tableFile.exists()) {
             return Optional.of(tableFile);
         }

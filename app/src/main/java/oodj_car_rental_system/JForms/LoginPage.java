@@ -5,9 +5,9 @@
 package oodj_car_rental_system.JForms;
 
 import oodj_car_rental_system.ApplicationContext.ApplicationContext;
-import oodj_car_rental_system.Entities.Admin;
-import oodj_car_rental_system.Entities.Customer;
-import oodj_car_rental_system.Entities.User;
+import oodj_car_rental_system.Entities.users.Admin;
+import oodj_car_rental_system.Entities.users.Customer;
+import oodj_car_rental_system.Entities.users.User;
 
 import java.util.Optional;
 
@@ -24,6 +24,7 @@ public class LoginPage extends javax.swing.JFrame {
      */
     public LoginPage() {
         initComponents();
+        this.setSize(720, 480);
     }
 
     public void setContext(ApplicationContext context) {
@@ -47,6 +48,7 @@ public class LoginPage extends javax.swing.JFrame {
         passwordTextField = new javax.swing.JTextField();
         LoginButton = new javax.swing.JButton();
         errorMessageLabel = new javax.swing.JLabel();
+        register_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(720, 480));
@@ -65,6 +67,13 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
+        register_btn.setText("register");
+        register_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                register_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,19 +81,25 @@ public class LoginPage extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(60, 60, 60)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(errorMessageLabel)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel2)
-                                                .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(passwordTextField)))
-                                        .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(322, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(jLabel2)
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addGap(18, 18, 18)
+                                                                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addGap(18, 18, 18)
+                                                                        .addComponent(passwordTextField)))
+                                                        .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(errorMessageLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(register_btn)
+                                                .addGap(568, 568, 568))))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +117,14 @@ public class LoginPage extends javax.swing.JFrame {
                                                 .addComponent(jLabel1)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(errorMessageLabel)
-                                .addGap(62, 62, 62))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(27, 27, 27)
+                                                .addComponent(errorMessageLabel))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(register_btn)))
+                                .addGap(47, 47, 47))
         );
 
         pack();
@@ -118,6 +138,14 @@ public class LoginPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
+    private void register_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_btnActionPerformed
+        RegisterPage registerPage = new RegisterPage();
+        registerPage.setContext(this.context);
+        this.setVisible(false);
+        registerPage.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_register_btnActionPerformed
+
     private boolean getCurrentUser() {
         if (checkIfUserValuesAreValid()) {
             this.currentUser = new User(usernameTextField.getText(), usernameTextField.getText());
@@ -129,7 +157,7 @@ public class LoginPage extends javax.swing.JFrame {
     }
 
     private void navigateToToDashboard() {
-        Optional<? extends  User> userOptional = context.getUserRepository().getCustomer(currentUser);
+        Optional<? extends User> userOptional = context.getUserRepository().getCustomer(currentUser);
         if (userOptional.isPresent()) {
             if (userOptional.get() instanceof Customer) {
                 CustomerDashboard customerDashboard = new CustomerDashboard();
@@ -140,6 +168,7 @@ public class LoginPage extends javax.swing.JFrame {
 
             } else if (userOptional.get() instanceof Admin) {
                 AdminDashboard adminDashboard = new AdminDashboard();
+                adminDashboard.setContext(this.context);
                 adminDashboard.setVisible(true);
                 this.setVisible(false);
             }
@@ -199,6 +228,7 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField passwordTextField;
+    private javax.swing.JButton register_btn;
     private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
 }

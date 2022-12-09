@@ -15,13 +15,12 @@ public class TableWriter {
 
     }
 
-    public <T> void writeNew(T tableToWrite) throws Exception {
+    public <T> int writeNew(T tableToWrite) throws Exception {
         checkIfGenericIsBaseClassChild(tableToWrite);
         TextDbTable textDbTable = this.tableFIleIOController.createTextDbTable((BaseClass) tableToWrite);
         File fileToWrite = this.tableFIleIOController.getTable(textDbTable).getFile();
-        System.out.println(fileToWrite.getName());
         String record = createDbTableRecord((BaseClass) tableToWrite, textDbTable);
-        writeNewRecord(fileToWrite, record);
+        return writeNewRecord(fileToWrite, record);
     }
 
 
@@ -69,7 +68,7 @@ public class TableWriter {
         }
     }
 
-    private void writeNewRecord(File fileToWrite, String record) throws Exception {
+    private int writeNewRecord(File fileToWrite, String record) throws Exception {
         ArrayList<String> fileContent = this.tableFIleIOController.getFIleContent(fileToWrite);
         int maxIndex = tableFIleIOController.getMaxIndex(fileContent);
         String newRecord = concatenateIDWithRecord(maxIndex, record);
@@ -78,6 +77,7 @@ public class TableWriter {
         FileWriter fileWriter = new FileWriter(fileToWrite);
         fileWriter.write(String.join("\n", fileContent));
         fileWriter.close();
+        return maxIndex;
     }
 
 
@@ -120,7 +120,11 @@ public class TableWriter {
 
     private String getFieldValue(TableField field, BaseClass tableClass) throws Exception {
         Field classField = tableClass.getClass().getDeclaredField(field.getName());
-        return String.valueOf(classField.get(tableClass));
+        String stringToReturn = String.valueOf(classField.get(tableClass));
+        if (stringToReturn.contains("`")){
+            throw new Exception("Sign '`' is forbidden to use");
+        }
+        return stringToReturn;
     }
 
 }

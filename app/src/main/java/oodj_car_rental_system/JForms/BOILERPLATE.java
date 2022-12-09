@@ -11,7 +11,7 @@ import oodj_car_rental_system.ApplicationContext.ApplicationContext;
  *
  * @author mark
  */
-public class CustomerDashboard extends javax.swing.JFrame {
+public class BOILERPLATE extends javax.swing.JFrame {
 
 	private ApplicationContext context;
 	public void setContext(ApplicationContext context){
@@ -21,7 +21,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 	 *
 	 * Creates new form CustomerDashboard
 	 */
-	public CustomerDashboard() {
+	public BOILERPLATE() {
 		initComponents();
 		this.setSize(720,480);
 	}
@@ -78,20 +78,21 @@ public class CustomerDashboard extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(CustomerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(BOILERPLATE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(CustomerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(BOILERPLATE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(CustomerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(BOILERPLATE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(CustomerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(BOILERPLATE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
+		//</editor-fold>
 		//</editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new CustomerDashboard().setVisible(true);
+				new BOILERPLATE().setVisible(true);
 			}
 		});
 	}

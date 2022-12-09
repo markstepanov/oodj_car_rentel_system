@@ -5,15 +5,11 @@ package oodj_car_rental_system;
 
 
 import oodj_car_rental_system.ApplicationContext.ApplicationContext;
-import oodj_car_rental_system.Entities.User;
 import oodj_car_rental_system.JForms.LoginPage;
-import oodj_car_rental_system.Models.UserDAO;
-import oodj_car_rental_system.ORMdeep.TableWriter;
 import oodj_car_rental_system.ORMdeep.TextFileORM;
+import oodj_car_rental_system.Repository.CarRepository;
 import oodj_car_rental_system.Repository.DatabaseFactory;
 import oodj_car_rental_system.Repository.UserRepository;
-
-import java.io.File;
 
 public class App {
     public String getGreeting() {
@@ -25,10 +21,15 @@ public class App {
 
         TextFileORM textFileORM = databaseFactory.createDatabase();
         UserRepository userRepository = new UserRepository(textFileORM.getTableWriter(), textFileORM.getTableReader(), textFileORM.getTableRecordDeleter());
-        ApplicationContext context = new ApplicationContext(userRepository);
+        CarRepository carRepository = new CarRepository(textFileORM.getTableWriter(), textFileORM.getTableReader(), textFileORM.getTableRecordDeleter());
+        ApplicationContext context = new ApplicationContext(userRepository, carRepository);
         LoginPage startUp = new LoginPage();
         startUp.setContext(context);
         startUp.setVisible(true);
+
+
+
+
 
 
 

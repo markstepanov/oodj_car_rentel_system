@@ -6,6 +6,8 @@ package oodj_car_rental_system.JForms;
 
 import oodj_car_rental_system.ApplicationContext.ApplicationContext;
 
+import javax.swing.*;
+
 /**
  *
  * @author mark
@@ -22,6 +24,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 	 */
 	public AdminDashboard() {
 		initComponents();
+		this.setSize(720,480);
 	}
 
 	/**
@@ -33,31 +36,85 @@ public class AdminDashboard extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                jLabel1 = new javax.swing.JLabel();
+                manage_cars_btn = new javax.swing.JButton();
+                manage_applications_btn = new javax.swing.JButton();
+                back_btn = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setResizable(false);
 
-                jLabel1.setText("admin Dashboard");
+                manage_cars_btn.setText("manage cars");
+                manage_cars_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                manage_cars_btnActionPerformed(evt);
+                        }
+                });
+
+                manage_applications_btn.setText("manage applications");
+                manage_applications_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                manage_applications_btnActionPerformed(evt);
+                        }
+                });
+
+                back_btn.setText("back");
+                back_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                back_btnActionPerformed(evt);
+                        }
+                });
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jLabel1)
-                                .addContainerGap(198, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(102, 102, 102)
+                                                .addComponent(manage_cars_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(150, 150, 150)
+                                                .addComponent(back_btn)))
+                                .addContainerGap(453, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(108, 108, 108)
+                                        .addComponent(manage_applications_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(447, Short.MAX_VALUE)))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(jLabel1)
-                                .addContainerGap(207, Short.MAX_VALUE))
+                                .addGap(186, 186, 186)
+                                .addComponent(manage_cars_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(70, 70, 70)
+                                .addComponent(back_btn)
+                                .addContainerGap(142, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(88, 88, 88)
+                                        .addComponent(manage_applications_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(334, Short.MAX_VALUE)))
                 );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
+
+        private void manage_applications_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manage_applications_btnActionPerformed
+			NewUserApplications newUserApplications = new NewUserApplications();
+			newUserApplications.setContext(this.context);
+			newUserApplications.setVisible(true);
+			dispose();
+        }//GEN-LAST:event_manage_applications_btnActionPerformed
+
+        private void manage_cars_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manage_cars_btnActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_manage_cars_btnActionPerformed
+
+        private void back_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btnActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_back_btnActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -95,6 +152,8 @@ public class AdminDashboard extends javax.swing.JFrame {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JLabel jLabel1;
+        private javax.swing.JButton back_btn;
+        private javax.swing.JButton manage_applications_btn;
+        private javax.swing.JButton manage_cars_btn;
         // End of variables declaration//GEN-END:variables
 }

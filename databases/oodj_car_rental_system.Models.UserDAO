@@ -1,5 +1,6 @@
 oodj_car_rental_system.Models.UserDAO&[id:IDFIELD,username:STRINGFIELD,password:STRINGFIELD,isAdmin:BOOLEANFIELD]
-nextIndex:6
+nextIndex:7
 ###
 0`mark`123`false
 1`admin`admin`true
+6`qwe`qwe`false

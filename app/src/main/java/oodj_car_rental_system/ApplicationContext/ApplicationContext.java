@@ -19,5 +19,7 @@ public class ApplicationContext {
         return userRepository;
     }
 
-
+    public CarRepository getCarRepository() {
+        return carRepository;
+    }
 }

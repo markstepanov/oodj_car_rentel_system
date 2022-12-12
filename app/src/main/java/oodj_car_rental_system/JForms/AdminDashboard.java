@@ -109,11 +109,17 @@ public class AdminDashboard extends javax.swing.JFrame {
         }//GEN-LAST:event_manage_applications_btnActionPerformed
 
         private void manage_cars_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manage_cars_btnActionPerformed
-                // TODO add your handling code here:
+			ManageCars manageCars = new ManageCars();
+			manageCars.setContext(context);
+			manageCars.setVisible(true);
+			dispose();
         }//GEN-LAST:event_manage_cars_btnActionPerformed
 
         private void back_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btnActionPerformed
-                // TODO add your handling code here:
+			LoginPage loginPage = new LoginPage();
+			loginPage.setContext(context);
+			loginPage.setVisible(true);
+			dispose();
         }//GEN-LAST:event_back_btnActionPerformed
 
 	/**

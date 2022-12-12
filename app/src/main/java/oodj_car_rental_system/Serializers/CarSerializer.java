@@ -12,12 +12,12 @@ public class CarSerializer {
 
 
     public static Car serializeCarDAOtoCarEntity(CarDAO carDAO) throws Exception{
-
+        int id = carDAO.getId();
         CarType carType = deserializeCarType(carDAO.carType).orElseThrow();
         CarFuel carFuel = deserializeCarFuel(carDAO.carFuel).orElseThrow();
         GearBoxType gearBoxType = deserializeGearBox(carDAO.gearBoxType).orElseThrow();
 
-        return new Car(carDAO.name, carDAO.pricePerHour, carType,carFuel, carDAO.seats, gearBoxType);
+        return new Car(id, carDAO.name, carDAO.pricePerHour, carType,carFuel, carDAO.seats, gearBoxType, carDAO.inStock);
     }
 
     public static CarDAO serializeCarEntityToCarDAO(Car car) throws Exception{
@@ -26,10 +26,12 @@ public class CarSerializer {
         String gearBoxType = serializeGearBoxType(car.getGearBoxType()).orElseThrow();
 
 
-        return new CarDAO(car.getName(), car.getPricePerHour(), carType, carFuel, car.getSeats(), gearBoxType);
+        CarDAO carDAO = new CarDAO(car.getName(), car.getPricePerHour(), carType, carFuel, car.getSeats(), gearBoxType, true);
+        carDAO.setId(car.getId());
+        return  carDAO;
     }
 
-    private static Optional<String> serializeCarType(CarType carType) {
+    public static Optional<String> serializeCarType(CarType carType) {
         if (carType.equals(CarType.HATCHBACK)) {
             return Optional.of("hatchback");
         } else if (carType.equals(CarType.SEDAN)) {
@@ -42,7 +44,7 @@ public class CarSerializer {
         return Optional.empty();
     }
 
-    private static Optional<String> serializeCarFuel(CarFuel carFuel) {
+    public static Optional<String> serializeCarFuel(CarFuel carFuel) {
         if (carFuel.equals(CarFuel.ELECTRIC)) {
             return Optional.of("electric");
         } else if (carFuel.equals(CarFuel.GASOLINE)) {
@@ -51,7 +53,7 @@ public class CarSerializer {
         return Optional.empty();
     }
 
-    private static Optional<String> serializeGearBoxType(GearBoxType gearBoxType) {
+    public  static Optional<String> serializeGearBoxType(GearBoxType gearBoxType) {
         if (gearBoxType.equals(GearBoxType.AUTOMATIC)) {
             return Optional.of("automatic");
         } else if (gearBoxType.equals(GearBoxType.MANUAL)) {
@@ -61,7 +63,7 @@ public class CarSerializer {
     }
 
 
-    private static Optional<CarType> deserializeCarType(String carType) {
+    public static Optional<CarType> deserializeCarType(String carType) {
         if (carType.equals("hatchback")) {
             return Optional.of(CarType.HATCHBACK);
         } else if (carType.equals("sedan")) {
@@ -75,7 +77,7 @@ public class CarSerializer {
     }
 
 
-    private static Optional<CarFuel> deserializeCarFuel(String carFuel) {
+    public static Optional<CarFuel> deserializeCarFuel(String carFuel) {
         if (carFuel.equals("electric")) {
             return Optional.of(CarFuel.ELECTRIC);
         } else if (carFuel.equals("gasoline")) {
@@ -84,7 +86,7 @@ public class CarSerializer {
         return Optional.empty();
     }
 
-    private static Optional<GearBoxType> deserializeGearBox(String gearBox){
+    public static Optional<GearBoxType> deserializeGearBox(String gearBox){
 
         if (gearBox.equals("automatic")){
             return Optional.of(GearBoxType.AUTOMATIC);

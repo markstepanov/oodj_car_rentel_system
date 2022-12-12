@@ -1,3 +1,8 @@
-oodj_car_rental_system.Models.CarDAO&[id:IDFIELD,name:STRINGFIELD,pricePerHour:FLOATFIELD,carType:STRINGFIELD,carFuel:STRINGFIELD,seats:INTFIELD,gearBoxType:STRINGFIELD]
-nextIndex:0
+oodj_car_rental_system.Models.CarDAO&[id:IDFIELD,name:STRINGFIELD,pricePerHour:FLOATFIELD,carType:STRINGFIELD,carFuel:STRINGFIELD,seats:INTFIELD,gearBoxType:STRINGFIELD,inStock:BOOLEANFIELD]
+nextIndex:5
 ###
+0`tesla`3.14`sedan`electric`5`automatic`true
+1`tesla`3.14`sedan`electric`5`automatic`true
+2`tesla`3.14`sedan`electric`5`automatic`true
+3`Honda Civic`2.12`hatchback`gasoline`4`manual`true
+4`Honda Civic`2.12`hatchback`gasoline`4`manual`true

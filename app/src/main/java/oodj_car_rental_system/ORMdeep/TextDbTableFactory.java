@@ -3,6 +3,7 @@ package oodj_car_rental_system.ORMdeep;
 import oodj_car_rental_system.ORMdeep.Annotations.*;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -77,8 +78,8 @@ public class TextDbTableFactory {
             return Optional.of(DbField.FLOATFIELD);
         } else if (field.isAnnotationPresent(StringField.class)) {
             return Optional.of(DbField.STRINGFIELD);
-        } else if (field.isAnnotationPresent(LocalTImeField.class)) {
-            return Optional.of(DbField.LOCALTIMEFIELD);
+        } else if (field.isAnnotationPresent(LocalDateTImeField.class)) {
+            return Optional.of(DbField.LOCALDATETIMEFIELD);
         } else if (field.isAnnotationPresent(IdField.class)) {
             return Optional.of(DbField.IDFIELD);
         } else if (field.isAnnotationPresent(BooleanField.class)){
@@ -98,8 +99,8 @@ public class TextDbTableFactory {
         else if (dbField.equals(DbField.STRINGFIELD)){
             return  String.class;
         }
-        else if (dbField.equals(DbField.LOCALTIMEFIELD)){
-            return  LocalTime.class;
+        else if (dbField.equals(DbField.LOCALDATETIMEFIELD)){
+            return  LocalDateTime.class;
         }
         else if (dbField.equals(DbField.BOOLEANFIELD)){
             return  boolean.class;

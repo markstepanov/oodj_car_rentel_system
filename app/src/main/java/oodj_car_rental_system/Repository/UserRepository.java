@@ -9,6 +9,7 @@ import oodj_car_rental_system.ORMdeep.TableReader;
 import oodj_car_rental_system.ORMdeep.TableRecordDeleter;
 import oodj_car_rental_system.ORMdeep.TableWriter;
 
+import java.security.cert.TrustAnchor;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class UserRepository {
     }
 
 
-    public <Y extends User> Optional<? extends User> getCustomer(User user) {
+    public Optional<IApplicationUser> getAplicationUser(User user) {
         BaseClass[] records;
         try {
             records = this.tableReader.readAll(new UserDAO());
@@ -35,12 +36,12 @@ public class UserRepository {
 
         for (BaseClass record : records) {
             UserDAO currentUser = (UserDAO) record;
-            System.out.println(currentUser.toString());
             if (currentUser.password.equals(user.getPassword()) || currentUser.username.equals(user.getUsername())) {
                 if (currentUser.isAdmin) {
-                    return Optional.of(new Admin(currentUser.username, currentUser.password));
+                    return Optional.of(new Admin(currentUser.getId(), currentUser.username, currentUser.password));
                 } else {
-                    return Optional.of(new Customer(currentUser.username, currentUser.password));
+                    System.out.println(currentUser.getId());
+                    return Optional.of(new Customer(currentUser.getId(), currentUser.username, currentUser.password));
                 }
             }
         }
@@ -112,6 +113,77 @@ public class UserRepository {
             }
         }
         return false;
+    }
+
+    public Optional<Customer> getCustomerByUserId(int id){
+        BaseClass record;
+        try {
+            record = tableReader.readById(new UserDAO(), id);
+        } catch (Exception e){
+            return Optional.empty();
+        }
+
+        UserDAO userDAO = (UserDAO) record;
+        if (userDAO.isAdmin) {
+            return Optional.empty();
+        }
+        return  Optional.of(new Customer(userDAO.getId(), userDAO.username, userDAO.password));
+    }
+
+
+    public Optional<CustomerDetails> getCustomerDetailsByCustomer(Customer customer){
+        int id = customer.getId();
+        BaseClass[] records;
+
+        try {
+            records = tableReader.readAll(new CustomerDetailsDAO());
+        } catch (Exception e){
+            return  Optional.empty();
+        }
+
+        for (BaseClass record: records){
+            CustomerDetailsDAO customerDetailsDAO = (CustomerDetailsDAO) record;
+            if (customerDetailsDAO.relatedToUser == customer.getId()){
+                return Optional.of(new CustomerDetails(
+                        customerDetailsDAO.firstName,
+                        customerDetailsDAO.secondName,
+                        customerDetailsDAO.email,
+                        customerDetailsDAO.balanceRM
+                ));
+            }
+        }
+        return Optional.empty();
+    }
+    public boolean toUpCustomerBalance(Customer customer, float amount) {
+        BaseClass[] records;
+        try {
+            records = tableReader.readAll(new CustomerDetailsDAO());
+        } catch (Exception e) {
+            return false;
+        }
+
+        for (BaseClass record: records){
+            CustomerDetailsDAO customerDetailsDAO = (CustomerDetailsDAO) record;
+
+            if (customerDetailsDAO.relatedToUser == customer.getId()){
+               return  increaseCustomerDetailsBalance(customerDetailsDAO,amount);
+            }
+        }
+
+        return false;
+    }
+
+    private boolean increaseCustomerDetailsBalance(CustomerDetailsDAO customerDetailsDAO, float amount){
+        if(amount <= 0){
+            return false;
+        }
+        customerDetailsDAO.balanceRM += amount;
+        try {
+            tableWriter.writeToID(customerDetailsDAO);
+        } catch (Exception e){
+            return  false;
+        }
+        return true;
     }
 
 

@@ -4,8 +4,16 @@
  */
 package oodj_car_rental_system.JForms;
 
-import oodj_car_rental_system.App;
 import oodj_car_rental_system.ApplicationContext.ApplicationContext;
+import oodj_car_rental_system.Entities.Bookings.Booking;
+import oodj_car_rental_system.Entities.cars.Car;
+import oodj_car_rental_system.Entities.users.Customer;
+import oodj_car_rental_system.Entities.users.CustomerDetails;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  *
@@ -14,6 +22,15 @@ import oodj_car_rental_system.ApplicationContext.ApplicationContext;
 public class CustomerDashboard extends javax.swing.JFrame {
 
 	private ApplicationContext context;
+	private Customer customer;
+
+    private CustomerDetails customerDetails;
+    private DefaultTableModel table;
+
+    private Optional<Booking> customerBookingOptional;
+
+    private  ArrayList<Car> availableCars;
+
 	public void setContext(ApplicationContext context){
 		this.context = context;
 	}
@@ -24,6 +41,11 @@ public class CustomerDashboard extends javax.swing.JFrame {
 	public CustomerDashboard() {
 		initComponents();
 		this.setSize(720,480);
+        this.table = (DefaultTableModel) this.jTable1.getModel();
+	}
+
+	public void setCustomer(Customer customer){
+		this.customer = customer;
 	}
 
 	/**
@@ -35,31 +57,201 @@ public class CustomerDashboard extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                greetings_label = new javax.swing.JLabel();
+                back_btn = new javax.swing.JButton();
+                top_up_balance_btn = new javax.swing.JButton();
                 jLabel1 = new javax.swing.JLabel();
+                balance_lb = new javax.swing.JLabel();
+                jScrollPane1 = new javax.swing.JScrollPane();
+                jTable1 = new javax.swing.JTable();
+                pick_a_car = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                addWindowListener(new java.awt.event.WindowAdapter() {
+                        public void windowOpened(java.awt.event.WindowEvent evt) {
+                                formWindowOpened(evt);
+                        }
+                });
 
-                jLabel1.setText("customer Dashboard");
+                greetings_label.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+                greetings_label.setText("customer Dashboard");
+
+                back_btn.setText("Back");
+                back_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                back_btnActionPerformed(evt);
+                        }
+                });
+
+                top_up_balance_btn.setText("Top Up Balance");
+                top_up_balance_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                top_up_balance_btnActionPerformed(evt);
+                        }
+                });
+
+                jLabel1.setText("Balance:");
+
+                balance_lb.setText("200");
+
+                jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                        new Object [][] {
+
+                        },
+                        new String [] {
+                                "Model", "Price per Hour", "Car Type", "Fuel", "GearBox "
+                        }
+                ) {
+                        Class[] types = new Class [] {
+                                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                        };
+                        boolean[] canEdit = new boolean [] {
+                                false, false, false, false, false
+                        };
+
+                        public Class getColumnClass(int columnIndex) {
+                                return types [columnIndex];
+                        }
+
+                        public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                return canEdit [columnIndex];
+                        }
+                });
+                jScrollPane1.setViewportView(jTable1);
+                if (jTable1.getColumnModel().getColumnCount() > 0) {
+                        jTable1.getColumnModel().getColumn(0).setResizable(false);
+                        jTable1.getColumnModel().getColumn(1).setResizable(false);
+                        jTable1.getColumnModel().getColumn(2).setResizable(false);
+                        jTable1.getColumnModel().getColumn(4).setResizable(false);
+                }
+
+                pick_a_car.setText("Pick a Car");
+                pick_a_car.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                pick_a_carActionPerformed(evt);
+                        }
+                });
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jLabel1)
-                                .addContainerGap(543, Short.MAX_VALUE))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(greetings_label)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel1)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(balance_lb))
+                                                        .addComponent(top_up_balance_btn)))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(back_btn)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(pick_a_car, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(43, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addComponent(jLabel1)
-                                .addContainerGap(388, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(54, 54, 54)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel1)
+                                                        .addComponent(balance_lb))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(top_up_balance_btn)
+                                                .addGap(18, 18, 18))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(greetings_label)
+                                                .addGap(36, 36, 36)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(back_btn)
+                                        .addComponent(pick_a_car))
+                                .addContainerGap(46, Short.MAX_VALUE))
                 );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
+
+        private void back_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btnActionPerformed
+			LoginPage loginPage = new LoginPage();
+			loginPage.setContext(context);
+			loginPage.setVisible(true);
+			dispose();
+        }//GEN-LAST:event_back_btnActionPerformed
+
+
+        private void top_up_balance_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_top_up_balance_btnActionPerformed
+			TopUpBalance topUpBalance = new TopUpBalance();
+			topUpBalance.setContext(context);
+			topUpBalance.setCustomer(this.customer);
+			topUpBalance.setVisible(true);
+			dispose();
+        }//GEN-LAST:event_top_up_balance_btnActionPerformed
+
+        private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+            Optional<CustomerDetails> customerDetailsOptional = this.context.getUserRepository().getCustomerDetailsByCustomer(customer);
+            Optional<ArrayList<Car>> cars = this.context.getCarRepository().getAllAvailableCars();
+            this.customerBookingOptional  = this.context.getBookingRepository().getCustomerValidBooking(customer);
+            if (customerDetailsOptional.isPresent() &&  cars.isPresent()){
+               this.availableCars = cars.get();
+               this.customerDetails = customerDetailsOptional.get();
+               editCustomerHeading();
+               fillCarsTable();
+            }
+        }//GEN-LAST:event_formWindowOpened
+
+        private  void editCustomerHeading(){
+            this.greetings_label.setText("Hello, " +customerDetails.getFistName() + "!");
+            this.balance_lb.setText("RM" + customerDetails.getBalanceRM());
+        }
+
+        private void fillCarsTable(){
+        for (Car car: this.availableCars){
+            this.table.insertRow(this.table.getRowCount(), new Object[]{
+                    car.getName(),
+                    car.getPricePerHour(),
+                    car.getCarType(),
+                    car.getCarFuel(),
+                    car.getGearBoxType()
+            });
+        }
+        }
+
+        private void pick_a_carActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pick_a_carActionPerformed
+            if (customerDetails.getBalanceRM() <= 40f){
+                JOptionPane.showMessageDialog(null, "In order to make booking, your balance should extend RM100");
+                return;
+            }
+            if (customerBookingOptional.isPresent()){
+                JOptionPane.showMessageDialog(null, "You already made the booking, Please go to My Bookings Page");
+                return;
+            }
+
+            int index = jTable1.getSelectedRow();
+            if (index == -1){
+                JOptionPane.showMessageDialog(null, "Please, pick a car first!");
+            }
+            Car selectedCar = this.availableCars.get(index);
+            if (this.context.getBookingRepository().makeABooking(customer, selectedCar)){
+                JOptionPane.showMessageDialog(null, "Booking now pending and soon will be approved!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Something went wrong, Please try again");
+            }
+
+
+        }
+
+
 
 	/**
 	 * @param args the command line arguments
@@ -97,6 +289,13 @@ public class CustomerDashboard extends javax.swing.JFrame {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JButton back_btn;
+        private javax.swing.JLabel balance_lb;
+        private javax.swing.JLabel greetings_label;
         private javax.swing.JLabel jLabel1;
+        private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JTable jTable1;
+        private javax.swing.JButton pick_a_car;
+        private javax.swing.JButton top_up_balance_btn;
         // End of variables declaration//GEN-END:variables
 }

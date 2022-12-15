@@ -1,9 +1,6 @@
 package oodj_car_rental_system.Repository;
 
-import oodj_car_rental_system.Models.CarDAO;
-import oodj_car_rental_system.Models.UserApplicationDAO;
-import oodj_car_rental_system.Models.UserDAO;
-import oodj_car_rental_system.Models.CustomerDetailsDAO;
+import oodj_car_rental_system.Models.*;
 import oodj_car_rental_system.ORMdeep.TextFileORM;
 
 public class DatabaseFactory {
@@ -18,6 +15,7 @@ public class DatabaseFactory {
 
        textFileORM.addTable(new UserDAO());
        textFileORM.addTable(new CarDAO());
+       textFileORM.addTable(new BookingDAO());
        textFileORM.addTable(new UserApplicationDAO());
        textFileORM.addTable(new CustomerDetailsDAO());
 

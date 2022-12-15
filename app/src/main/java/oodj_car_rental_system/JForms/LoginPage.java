@@ -7,6 +7,7 @@ package oodj_car_rental_system.JForms;
 import oodj_car_rental_system.ApplicationContext.ApplicationContext;
 import oodj_car_rental_system.Entities.users.Admin;
 import oodj_car_rental_system.Entities.users.Customer;
+import oodj_car_rental_system.Entities.users.IApplicationUser;
 import oodj_car_rental_system.Entities.users.User;
 
 import java.util.Optional;
@@ -157,26 +158,25 @@ public class LoginPage extends javax.swing.JFrame {
     }
 
     private void navigateToToDashboard() {
-        Optional<? extends User> userOptional = context.getUserRepository().getCustomer(currentUser);
-        if (userOptional.isPresent()) {
-            if (userOptional.get() instanceof Customer) {
-                CustomerDashboard customerDashboard = new CustomerDashboard();
-                this.setVisible(false);
-                customerDashboard.setContext(this.context);
-                customerDashboard.setVisible(true);
-
-
-            } else if (userOptional.get() instanceof Admin) {
+        Optional<IApplicationUser> userOptional = context.getUserRepository().getAplicationUser(currentUser);
+        if (userOptional.isEmpty()){
+            errorMessageLabel.setText("Invalid Username or Password");
+            return;
+        }
+        IApplicationUser user = userOptional.get();
+        if (user.getAdminStatus()){
                 AdminDashboard adminDashboard = new AdminDashboard();
                 adminDashboard.setContext(this.context);
                 adminDashboard.setVisible(true);
-                this.setVisible(false);
-            }
-
+                dispose();
         } else {
-            errorMessageLabel.setText("Invalid Username or Password");
-        }
 
+                CustomerDashboard customerDashboard = new CustomerDashboard();
+                customerDashboard.setContext(this.context);
+                customerDashboard.setCustomer(new Customer(user.getId(), user.getUsername(), user.getPassword()));
+                customerDashboard.setVisible(true);
+                dispose();
+        }
     }
 
     private boolean checkIfUserValuesAreValid() {

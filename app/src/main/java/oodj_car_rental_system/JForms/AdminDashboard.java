@@ -39,18 +39,22 @@ public class AdminDashboard extends javax.swing.JFrame {
                 manage_cars_btn = new javax.swing.JButton();
                 manage_applications_btn = new javax.swing.JButton();
                 back_btn = new javax.swing.JButton();
+                jLabel1 = new javax.swing.JLabel();
+                manage_bookings_btn = new javax.swing.JButton();
+                booking_historty_btn = new javax.swing.JButton();
+                generate_report_btn = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setResizable(false);
 
-                manage_cars_btn.setText("manage cars");
+                manage_cars_btn.setText("Manage Cars");
                 manage_cars_btn.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 manage_cars_btnActionPerformed(evt);
                         }
                 });
 
-                manage_applications_btn.setText("manage applications");
+                manage_applications_btn.setText("Manage New Users Applications");
                 manage_applications_btn.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 manage_applications_btnActionPerformed(evt);
@@ -64,38 +68,58 @@ public class AdminDashboard extends javax.swing.JFrame {
                         }
                 });
 
+                jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+                jLabel1.setText("Admin Dashboard");
+
+                manage_bookings_btn.setText("Manage Bookings");
+                manage_bookings_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                manage_bookings_btnActionPerformed(evt);
+                        }
+                });
+
+                booking_historty_btn.setText("Customer Booking History");
+
+                generate_report_btn.setText("Generate Report");
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(102, 102, 102)
-                                                .addComponent(manage_cars_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(150, 150, 150)
-                                                .addComponent(back_btn)))
-                                .addContainerGap(453, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(108, 108, 108)
-                                        .addComponent(manage_applications_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(447, Short.MAX_VALUE)))
+                                .addGap(88, 88, 88)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
+                                .addComponent(back_btn)
+                                .addGap(41, 41, 41))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(137, 137, 137)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(manage_cars_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(manage_applications_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                                        .addComponent(manage_bookings_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(booking_historty_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(generate_report_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(186, 186, 186)
-                                .addComponent(manage_cars_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addComponent(back_btn)
-                                .addContainerGap(142, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(88, 88, 88)
-                                        .addComponent(manage_applications_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(334, Short.MAX_VALUE)))
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(back_btn))
+                                .addGap(39, 39, 39)
+                                .addComponent(manage_applications_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(manage_cars_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(manage_bookings_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(booking_historty_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(generate_report_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(57, Short.MAX_VALUE))
                 );
 
                 pack();
@@ -121,6 +145,13 @@ public class AdminDashboard extends javax.swing.JFrame {
 			loginPage.setVisible(true);
 			dispose();
         }//GEN-LAST:event_back_btnActionPerformed
+
+        private void manage_bookings_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manage_bookings_btnActionPerformed
+            ManageBookings manageBookings = new ManageBookings();
+            manageBookings.setContext(context);
+            manageBookings.setVisible(true);
+            dispose();
+        }//GEN-LAST:event_manage_bookings_btnActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -159,7 +190,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton back_btn;
+        private javax.swing.JButton booking_historty_btn;
+        private javax.swing.JButton generate_report_btn;
+        private javax.swing.JLabel jLabel1;
         private javax.swing.JButton manage_applications_btn;
+        private javax.swing.JButton manage_bookings_btn;
         private javax.swing.JButton manage_cars_btn;
         // End of variables declaration//GEN-END:variables
 }

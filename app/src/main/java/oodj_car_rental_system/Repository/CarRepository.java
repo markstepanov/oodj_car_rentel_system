@@ -75,14 +75,57 @@ public class CarRepository {
     }
 
     public boolean editCar(Car car){
+        CarDAO carToWrite;
+        try {
+            carToWrite = CarSerializer.serializeCarEntityToCarDAO(car);
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        System.out.println(carToWrite.toString());
+
         try{
-            CarDAO  carToWrite = CarSerializer.serializeCarEntityToCarDAO(car);
-            System.out.println(carToWrite.toString());
             tableWriter.writeToID(carToWrite);
             return  true;
         } catch (Exception e){
+            e.printStackTrace();
             return false;
         }
+    }
+
+
+    public boolean deleteCarById(int id){
+        try {
+            tableRecordDeleter.deleteRecordById(new CarDAO(), id);
+        } catch (Exception e){
+            return false;
+        }
+        return  true;
+    }
+
+    public Optional<ArrayList<Car>> getAllAvailableCars(){
+        BaseClass [] records;
+        try{
+            records = tableReader.readAll(new CarDAO());
+        } catch (Exception e){
+            return Optional.empty();
+        }
+
+        ArrayList<Car> cars = new ArrayList<>();
+
+        for (BaseClass record: records){
+            Car car;
+            try {
+                car = CarSerializer.serializeCarDAOtoCarEntity((CarDAO) record);
+            } catch (Exception e){
+                continue;
+            }
+            if (car.isInStock()){
+                cars.add(car);
+            }
+        }
+        if (cars.isEmpty()) return Optional.empty();
+        return Optional.of(cars);
     }
 
 

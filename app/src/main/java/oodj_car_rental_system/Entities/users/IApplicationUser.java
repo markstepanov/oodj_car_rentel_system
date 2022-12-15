@@ -8,4 +8,6 @@ public interface IApplicationUser {
 
     public boolean getAdminStatus();
 
+    public int getId();
+
 }

@@ -7,6 +7,7 @@ package oodj_car_rental_system;
 import oodj_car_rental_system.ApplicationContext.ApplicationContext;
 import oodj_car_rental_system.JForms.LoginPage;
 import oodj_car_rental_system.ORMdeep.TextFileORM;
+import oodj_car_rental_system.Repository.BookingRepository;
 import oodj_car_rental_system.Repository.CarRepository;
 import oodj_car_rental_system.Repository.DatabaseFactory;
 import oodj_car_rental_system.Repository.UserRepository;
@@ -22,14 +23,11 @@ public class App {
         TextFileORM textFileORM = databaseFactory.createDatabase();
         UserRepository userRepository = new UserRepository(textFileORM.getTableWriter(), textFileORM.getTableReader(), textFileORM.getTableRecordDeleter());
         CarRepository carRepository = new CarRepository(textFileORM.getTableWriter(), textFileORM.getTableReader(), textFileORM.getTableRecordDeleter());
-        ApplicationContext context = new ApplicationContext(userRepository, carRepository);
+        BookingRepository bookingRepository = new BookingRepository(textFileORM.getTableWriter(), textFileORM.getTableReader(), textFileORM.getTableRecordDeleter());
+        ApplicationContext context = new ApplicationContext(userRepository, carRepository, bookingRepository);
         LoginPage startUp = new LoginPage();
         startUp.setContext(context);
         startUp.setVisible(true);
-
-
-
-
 
 
 

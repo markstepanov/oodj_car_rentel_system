@@ -1,28 +1,38 @@
 package oodj_car_rental_system.Entities.users;
 
-public class Customer extends User {
+public class Customer implements IApplicationUser{
 
-    private float balanceRM;
-    private CustomerDetails userDetail;
+    private int id;
 
-    public Customer(String username, String password, float balanceRM, CustomerDetails userDetail) {
-        super(username, password);
-        this.balanceRM = balanceRM;
-        this.userDetail = userDetail;
-    }
+    private String username;
 
-    public Customer(String username, String password){
-       super(username, password);
-    }
+    private String password;
 
-    public float getBalanceRM() {
-        return balanceRM;
-    }
 
-    public void setBalanceRM(float balanceRM) {
-        this.balanceRM = balanceRM;
+    public Customer(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
     }
 
 
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean getAdminStatus() {
+        return false;
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
+    }
 }

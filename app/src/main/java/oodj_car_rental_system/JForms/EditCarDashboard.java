@@ -65,6 +65,7 @@ public class EditCarDashboard extends javax.swing.JFrame {
                 jLabel8 = new javax.swing.JLabel();
                 seats_sp = new javax.swing.JSpinner();
                 edit_car_btn = new javax.swing.JButton();
+                delete_car = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 addWindowListener(new java.awt.event.WindowAdapter() {
@@ -74,7 +75,7 @@ public class EditCarDashboard extends javax.swing.JFrame {
                 });
 
                 jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-                jLabel1.setText("Add New Car");
+                jLabel1.setText("Edit Car Dashboard");
 
                 jLabel2.setText("Name");
 
@@ -110,6 +111,13 @@ public class EditCarDashboard extends javax.swing.JFrame {
                         }
                 });
 
+                delete_car.setText("Delete Car");
+                delete_car.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                delete_carActionPerformed(evt);
+                        }
+                });
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
@@ -137,12 +145,15 @@ public class EditCarDashboard extends javax.swing.JFrame {
                                                 .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(back_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(edit_car_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(delete_car, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(edit_car_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap(94, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel1)
@@ -176,7 +187,9 @@ public class EditCarDashboard extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(seats_sp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                                .addComponent(edit_car_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(edit_car_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(delete_car, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(39, 39, 39))
                 );
 
@@ -208,25 +221,48 @@ public class EditCarDashboard extends javax.swing.JFrame {
         }//GEN-LAST:event_formWindowOpened
 
         private void edit_car_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_car_btnActionPerformed
-        try {
             Car newCarInfo;
-            newCarInfo = getCarInformation();
+            try{
+                newCarInfo = getCarInformation();
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Something went wrong");
+                return;
+            }
 
-            newCarInfo.setId(this.car.getId());
-            this.context.getCarRepository().editCar(newCarInfo);
+            if (!editCurrentCar(newCarInfo)){
+                JOptionPane.showMessageDialog(null, "Something went wrong");
+            }
 
-
+//
             JOptionPane.showMessageDialog(null, "Car information changed");
             ManageCars manageCars = new ManageCars();
             manageCars.setContext(context);
             manageCars.setVisible(true);
             dispose();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
 
         }//GEN-LAST:event_edit_car_btnActionPerformed
 
+        private void delete_carActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_carActionPerformed
+        if (!this.context.getCarRepository().deleteCarById(this.car.getId())){
+           JOptionPane.showMessageDialog(null, "Something went wrong");
+           return;
+        }
+
+        JOptionPane.showMessageDialog(null, "Car" + this.car.getName() + " has been deleted");
+        ManageCars manageCars = new ManageCars();
+        manageCars.setContext(context);
+        manageCars.setVisible(true);
+        dispose();
+        }//GEN-LAST:event_delete_carActionPerformed
+
+    private boolean editCurrentCar(Car newCarInfo){
+        newCarInfo.setId(this.car.getId());
+        System.out.println(newCarInfo.getId());
+        if (!this.context.getCarRepository().editCar(newCarInfo)){
+            return false;
+        }
+        return  true;
+    }
     private void add_car_btnActionPerformed(java.awt.event.ActionEvent evt) {
 
 //        try {
@@ -370,6 +406,7 @@ private Car getCarInformation() throws  Exception{
         private javax.swing.JButton back_btn;
         private javax.swing.JComboBox<String> car_fuel_chb;
         private javax.swing.JComboBox<String> car_type_chb;
+        private javax.swing.JButton delete_car;
         private javax.swing.JButton edit_car_btn;
         private javax.swing.JComboBox<String> gearbox_chb;
         private javax.swing.JLabel jLabel1;

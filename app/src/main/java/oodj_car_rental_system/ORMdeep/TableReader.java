@@ -1,5 +1,6 @@
 package oodj_car_rental_system.ORMdeep;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,8 +77,8 @@ public class TableReader {
             else if (existingTable.getFields()[i].getFieldType().equals(DbField.FLOATFIELD)) {
                 currentInstance.getClass().getDeclaredField(fieldName).set(currentInstance, Float.valueOf(record.split("`")[fieldNum]));
             }
-            else if (existingTable.getFields()[i].getFieldType().equals(DbField.LOCALTIMEFIELD)) {
-                currentInstance.getClass().getDeclaredField(fieldName).set(currentInstance, LocalTime.parse(record.split("`")[fieldNum]));
+            else if (existingTable.getFields()[i].getFieldType().equals(DbField.LOCALDATETIMEFIELD)) {
+                currentInstance.getClass().getDeclaredField(fieldName).set(currentInstance, LocalDateTime.parse(record.split("`")[fieldNum]));
             }
             else if (existingTable.getFields()[i].getFieldType().equals(DbField.STRINGFIELD)) {
                 currentInstance.getClass().getDeclaredField(fieldName).set(currentInstance, record.split("`")[fieldNum]);

@@ -49,6 +49,7 @@ public class TableWriter {
         for (int i = 0; i < fileContent.size(); i++) {
             if (fileContent.get(i).split(splitter)[0].equals(String.valueOf(idToWrite))) {
 
+                record = record.substring(0, record.length() -1);
                 fileContent.set(i, record);
                 FileWriter fileWriter = new FileWriter(fileToWrite);
                 fileWriter.write(String.join("\n", fileContent));
@@ -62,7 +63,7 @@ public class TableWriter {
 
 
     private void checkIfNewRecordHasLegitimateID(int idToWrite, int maxIndex) throws Exception {
-        if (!(idToWrite > 0 && idToWrite < maxIndex)) {
+        if (!(idToWrite >= 0 && idToWrite < maxIndex)) {
             throw new Exception("You specified wrong ID. The ID should be more than 0 and less than nextIndex " +
                     "(specified in metadata).Current maxIndex is " + maxIndex);
         }

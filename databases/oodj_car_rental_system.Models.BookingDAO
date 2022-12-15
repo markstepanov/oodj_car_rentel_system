@@ -1,0 +1,4 @@
+oodj_car_rental_system.Models.BookingDAO&[id:IDFIELD,relatedToUser:INTFIELD,relatedToCar:INTFIELD,initiationDate:LOCALDATETIMEFIELD,bookingStartDate:LOCALDATETIMEFIELD,closingTime:LOCALDATETIMEFIELD,Status:STRINGFIELD]
+nextIndex:1
+###
+0`7`3`2022-12-15T13:25:25.814154`2022-12-15T13:25:25.814359`2022-12-15T13:25:25.814390`pending

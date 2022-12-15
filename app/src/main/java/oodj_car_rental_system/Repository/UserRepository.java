@@ -166,7 +166,7 @@ public class UserRepository {
             CustomerDetailsDAO customerDetailsDAO = (CustomerDetailsDAO) record;
 
             if (customerDetailsDAO.relatedToUser == customer.getId()){
-               return  increaseCustomerDetailsBalance(customerDetailsDAO,amount);
+               return   increaseCustomerDetailsBalance(customerDetailsDAO,amount);
             }
         }
 
@@ -186,6 +186,37 @@ public class UserRepository {
         return true;
     }
 
+
+    public boolean withdrawalCustomerBalance(Customer customer, float amountToWithdrawal){
+        BaseClass[] records;
+        try{
+            records = tableReader.readAll(new CustomerDetailsDAO());
+        } catch (Exception e){
+            return false;
+        }
+
+        for (BaseClass record: records){
+            CustomerDetailsDAO customerDetailsDAO = (CustomerDetailsDAO) record;
+            if (customerDetailsDAO.relatedToUser == customer.getId()){
+
+                return  decreaseCustomerDetailsBalance(customerDetailsDAO, amountToWithdrawal);
+            }
+        }
+        return false;
+    }
+
+    private boolean decreaseCustomerDetailsBalance(CustomerDetailsDAO customerDetailsDAO, float amount){
+        if(amount <= 0){
+            return false;
+        }
+        customerDetailsDAO.balanceRM -= amount;
+        try {
+            tableWriter.writeToID(customerDetailsDAO);
+        } catch (Exception e){
+            return  false;
+        }
+        return true;
+    }
 
     private boolean addNewCustomer(UserApplicationDAO userApplication) {
         int userID = addNewUser(new User(userApplication.username, userApplication.password), false);

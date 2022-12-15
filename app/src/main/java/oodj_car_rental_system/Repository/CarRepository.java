@@ -103,6 +103,26 @@ public class CarRepository {
         return  true;
     }
 
+    public boolean changeCarStockStatus(int carId, boolean status){
+        CarDAO car;
+        try {
+            car = (CarDAO)tableReader.readById(new CarDAO(), carId);
+        } catch (Exception e){
+            return false;
+        }
+
+
+        car.inStock = status;
+        try{
+            tableWriter.writeToID(car);
+        } catch (Exception e){
+            return false;
+        }
+
+        System.out.println("status changed");
+        return true;
+    }
+
     public Optional<ArrayList<Car>> getAllAvailableCars(){
         BaseClass [] records;
         try{

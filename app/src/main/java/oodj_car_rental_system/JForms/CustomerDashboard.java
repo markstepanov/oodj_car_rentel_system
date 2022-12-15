@@ -65,6 +65,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 jScrollPane1 = new javax.swing.JScrollPane();
                 jTable1 = new javax.swing.JTable();
                 pick_a_car = new javax.swing.JButton();
+                user_bookings_btn = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 addWindowListener(new java.awt.event.WindowAdapter() {
@@ -132,6 +133,13 @@ public class CustomerDashboard extends javax.swing.JFrame {
                         }
                 });
 
+                user_bookings_btn.setText("My booking");
+                user_bookings_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                user_bookings_btnActionPerformed(evt);
+                        }
+                });
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
@@ -152,6 +160,8 @@ public class CustomerDashboard extends javax.swing.JFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addComponent(back_btn)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(user_bookings_btn)
+                                                .addGap(26, 26, 26)
                                                 .addComponent(pick_a_car, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap(43, Short.MAX_VALUE))
                 );
@@ -175,7 +185,8 @@ public class CustomerDashboard extends javax.swing.JFrame {
                                 .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(back_btn)
-                                        .addComponent(pick_a_car))
+                                        .addComponent(pick_a_car)
+                                        .addComponent(user_bookings_btn))
                                 .addContainerGap(46, Short.MAX_VALUE))
                 );
 
@@ -210,6 +221,18 @@ public class CustomerDashboard extends javax.swing.JFrame {
             }
         }//GEN-LAST:event_formWindowOpened
 
+        private void user_bookings_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_bookings_btnActionPerformed
+            if (customerBookingOptional.isEmpty()){
+                JOptionPane.showMessageDialog(null, "You haven't book a cer yet!");
+                return;
+            }
+            CustomerBooking customerBooking = new CustomerBooking();
+            customerBooking.setContext(context);
+            customerBooking.setCustomer(this.customer);
+            customerBooking.setVisible(true);
+            dispose();
+        }//GEN-LAST:event_user_bookings_btnActionPerformed
+
         private  void editCustomerHeading(){
             this.greetings_label.setText("Hello, " +customerDetails.getFistName() + "!");
             this.balance_lb.setText("RM" + customerDetails.getBalanceRM());
@@ -227,7 +250,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         }
         }
 
-        private void pick_a_carActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pick_a_carActionPerformed
+        private void pick_a_carActionPerformed(java.awt.event.ActionEvent evt) {                                           
             if (customerDetails.getBalanceRM() <= 40f){
                 JOptionPane.showMessageDialog(null, "In order to make booking, your balance should extend RM100");
                 return;
@@ -297,5 +320,6 @@ public class CustomerDashboard extends javax.swing.JFrame {
         private javax.swing.JTable jTable1;
         private javax.swing.JButton pick_a_car;
         private javax.swing.JButton top_up_balance_btn;
+        private javax.swing.JButton user_bookings_btn;
         // End of variables declaration//GEN-END:variables
 }

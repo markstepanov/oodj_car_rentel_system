@@ -79,6 +79,11 @@ public class AdminDashboard extends javax.swing.JFrame {
                 });
 
                 booking_historty_btn.setText("Customer Booking History");
+                booking_historty_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                booking_historty_btnActionPerformed(evt);
+                        }
+                });
 
                 generate_report_btn.setText("Generate Report");
 
@@ -152,6 +157,13 @@ public class AdminDashboard extends javax.swing.JFrame {
             manageBookings.setVisible(true);
             dispose();
         }//GEN-LAST:event_manage_bookings_btnActionPerformed
+
+        private void booking_historty_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_booking_historty_btnActionPerformed
+        CustomerList customerList = new CustomerList();
+        customerList.setContext(context);
+        customerList.setVisible(true);
+        dispose();
+        }//GEN-LAST:event_booking_historty_btnActionPerformed
 
 	/**
 	 * @param args the command line arguments

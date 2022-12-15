@@ -11,6 +11,7 @@ import oodj_car_rental_system.Repository.BookingRepository;
 import oodj_car_rental_system.Repository.CarRepository;
 import oodj_car_rental_system.Repository.DatabaseFactory;
 import oodj_car_rental_system.Repository.UserRepository;
+import oodj_car_rental_system.utils.PdfGenerator;
 
 public class App {
     public String getGreeting() {
@@ -26,6 +27,9 @@ public class App {
         BookingRepository bookingRepository = new BookingRepository(textFileORM.getTableWriter(), textFileORM.getTableReader(), textFileORM.getTableRecordDeleter());
         ApplicationContext context = new ApplicationContext(userRepository, carRepository, bookingRepository);
         LoginPage startUp = new LoginPage();
+
+//        PdfGenerator pdfGenerator = new PdfGenerator(textFileORM.getTableWriter(),textFileORM.getTableReader());
+//        pdfGenerator.generatePdf("report.pdf");
         startUp.setContext(context);
         startUp.setVisible(true);
 

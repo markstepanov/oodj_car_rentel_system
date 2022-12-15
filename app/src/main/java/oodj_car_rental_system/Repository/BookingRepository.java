@@ -5,6 +5,7 @@ import oodj_car_rental_system.Entities.Bookings.BookingStatus;
 import oodj_car_rental_system.Entities.cars.Car;
 import oodj_car_rental_system.Entities.users.Customer;
 import oodj_car_rental_system.Models.BookingDAO;
+import oodj_car_rental_system.Models.CarDAO;
 import oodj_car_rental_system.ORMdeep.BaseClass;
 import oodj_car_rental_system.ORMdeep.TableReader;
 import oodj_car_rental_system.ORMdeep.TableRecordDeleter;
@@ -90,5 +91,58 @@ public class BookingRepository {
         } catch (Exception e){
             return false;
         }
+    }
+
+    public boolean setBookingStatus(Booking booking, BookingStatus status){
+        booking.setStatus(status);
+        BookingDAO newRecord = BookingSerializer.serializeBookingToBookingDAO(booking);
+        try {
+            tableWriter.writeToID(newRecord);
+        } catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+    public  boolean startBooking(Booking booking){
+        booking.setBookingStartDate(LocalDateTime.now());
+        booking.setStatus(BookingStatus.ACTIVE);
+        BookingDAO bookingDAO = BookingSerializer.serializeBookingToBookingDAO(booking);
+        try{
+            tableWriter.writeToID(bookingDAO);
+        } catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    public  Optional<Booking> closeBooking(Booking booking){
+        booking.setClosingTime(LocalDateTime.now());
+        booking.setStatus(BookingStatus.CLOSED);
+        BookingDAO bookingDAO = BookingSerializer.serializeBookingToBookingDAO(booking);
+
+        try {
+            tableWriter.writeToID(bookingDAO);
+        } catch (Exception e){
+            return Optional.empty();
+        }
+        return  Optional.of(booking);
+    }
+
+
+    public  Optional<ArrayList<Booking>> getAllClosedBookings(){
+        BaseClass[] records;
+
+        try{
+            records = tableReader.readAll(new BookingDAO());
+        } catch (Exception e){
+            return Optional.empty();
+        }
+
+        ArrayList<Booking> bookings = new ArrayList<>();
+        for (BaseClass record: records){
+            Booking booking= BookingSerializer.serializeBookingDAOtoBookingEntity((BookingDAO) record);
+            bookings.add(booking);
+        }
+        return Optional.of(bookings);
     }
 }

@@ -7,6 +7,7 @@ package oodj_car_rental_system.JForms;
 import oodj_car_rental_system.App;
 import oodj_car_rental_system.ApplicationContext.ApplicationContext;
 import oodj_car_rental_system.Entities.Bookings.Booking;
+import oodj_car_rental_system.Entities.Bookings.BookingStatus;
 import oodj_car_rental_system.Entities.cars.Car;
 import oodj_car_rental_system.Entities.users.Customer;
 
@@ -162,11 +163,47 @@ public class ManageBookings extends javax.swing.JFrame {
         }//GEN-LAST:event_back_btnActionPerformed
 
         private void reject_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reject_btnActionPerformed
-            System.out.println(getSelectedBooking().orElseThrow());
+        Booking booking;
+            try {
+                booking = getSelectedBooking().orElseThrow();
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Something went wrong");
+                return;
+            }
+
+            if (!this.context.getBookingRepository().setBookingStatus(booking, BookingStatus.REJECTED)){
+                JOptionPane.showMessageDialog(null, "Something went wrong");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(null, "Booking rejected");
+
+            AdminDashboard adminDashboard = new AdminDashboard();
+            adminDashboard.setContext(context);
+            adminDashboard.setVisible(true);
+            dispose();
         }//GEN-LAST:event_reject_btnActionPerformed
 
         private void accpet_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accpet_btnActionPerformed
-            System.out.println(getSelectedBooking().orElseThrow());
+        Booking booking;
+            try {
+                booking = getSelectedBooking().orElseThrow();
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Something went wrong");
+                return;
+            }
+
+            if (!this.context.getBookingRepository().setBookingStatus(booking, BookingStatus.APPROVED)){
+                JOptionPane.showMessageDialog(null, "Something went wrong");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(null, "Booking approved");
+
+            AdminDashboard adminDashboard = new AdminDashboard();
+            adminDashboard.setContext(context);
+            adminDashboard.setVisible(true);
+            dispose();
         }//GEN-LAST:event_accpet_btnActionPerformed
 
     private  Optional<Booking> getSelectedBooking(){

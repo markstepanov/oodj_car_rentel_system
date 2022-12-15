@@ -1,6 +1,9 @@
 package oodj_car_rental_system.Entities.Bookings;
 
+import oodj_car_rental_system.utils.PricingFactor;
+
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Booking {
 
@@ -17,7 +20,15 @@ public class Booking {
 
     private BookingStatus status;
 
-    public Booking(int id,int relatedToUser, int relatedToCar, LocalDateTime initiationDate, LocalDateTime bookingStartDate, LocalDateTime closingTime, BookingStatus status) {
+    public void setBookingStartDate(LocalDateTime bookingStartDate) {
+        this.bookingStartDate = bookingStartDate;
+    }
+
+    public void setClosingTime(LocalDateTime closingTime) {
+        this.closingTime = closingTime;
+    }
+
+    public Booking(int id, int relatedToUser, int relatedToCar, LocalDateTime initiationDate, LocalDateTime bookingStartDate, LocalDateTime closingTime, BookingStatus status) {
         this.id = id;
         this.relatedToUser = relatedToUser;
         this.relatedToCar = relatedToCar;
@@ -47,11 +58,15 @@ public class Booking {
         return closingTime;
     }
 
+    public void setStatus(BookingStatus status) {
+        this.status = status;
+    }
+
     public BookingStatus getStatus() {
         return status;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
@@ -67,4 +82,26 @@ public class Booking {
                 ", status=" + status +
                 '}';
     }
+
+    public float calculateBookingPrice(float pricePerHour, PricingFactor factor) {
+        if (factor.equals(PricingFactor.SECONDS)) {
+            return getSeconds() * pricePerHour;
+        }
+        float result = getHours() * pricePerHour;
+        if (result == 0f){
+            return pricePerHour;
+        }
+        return  result;
+    }
+
+    private long getSeconds() {
+        return ChronoUnit.SECONDS.between(this.bookingStartDate, this.closingTime);
+    }
+
+    private long getHours() {
+        long hours = ChronoUnit.HOURS.between(this.bookingStartDate, this.closingTime);
+        System.out.println(hours);
+        return hours;
+    }
 }
+

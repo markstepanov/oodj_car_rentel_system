@@ -168,6 +168,10 @@ public class RegisterPage extends javax.swing.JFrame {
 
     private void submit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_btnActionPerformed
         submitUserApplication();
+        LoginPage loginPage = new LoginPage();
+        loginPage.setContext(context);
+        loginPage.setVisible(true);
+        dispose();
     }//GEN-LAST:event_submit_btnActionPerformed
 
 
@@ -176,6 +180,7 @@ public class RegisterPage extends javax.swing.JFrame {
           return;
        }
       submitNewApplication();
+
     }
 
 

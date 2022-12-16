@@ -1,5 +1,0 @@
-oodj_car_rental_system.Models.UserDAO&[id:IDFIELD,username:STRINGFIELD,password:STRINGFIELD,isAdmin:BOOLEANFIELD]
-nextIndex:8
-###
-1`admin`admin`true
-7`mark`mark`false

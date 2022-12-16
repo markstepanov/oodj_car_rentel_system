@@ -1,5 +1,0 @@
-oodj_car_rental_system.Models.CarDAO&[id:IDFIELD,name:STRINGFIELD,pricePerHour:FLOATFIELD,carType:STRINGFIELD,carFuel:STRINGFIELD,seats:INTFIELD,gearBoxType:STRINGFIELD,inStock:BOOLEANFIELD]
-nextIndex:6
-###
-3`tesla`123.0`sedan`electric`1`automatic`true
-5`some_car`10.0`suv`gasoline`4`automatic`true

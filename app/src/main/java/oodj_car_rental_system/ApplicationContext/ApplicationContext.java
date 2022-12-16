@@ -3,6 +3,7 @@ package oodj_car_rental_system.ApplicationContext;
 import oodj_car_rental_system.Repository.BookingRepository;
 import oodj_car_rental_system.Repository.CarRepository;
 import oodj_car_rental_system.Repository.UserRepository;
+import oodj_car_rental_system.utils.PdfGenerator;
 
 public class ApplicationContext {
 
@@ -10,6 +11,8 @@ public class ApplicationContext {
     private CarRepository carRepository;
 
     private BookingRepository bookingRepository;
+
+
 
 
     public ApplicationContext(UserRepository userRepository, CarRepository carRepository, BookingRepository bookingRepository) {

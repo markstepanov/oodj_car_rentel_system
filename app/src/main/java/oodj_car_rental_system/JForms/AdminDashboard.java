@@ -5,8 +5,10 @@
 package oodj_car_rental_system.JForms;
 
 import oodj_car_rental_system.ApplicationContext.ApplicationContext;
+import oodj_car_rental_system.utils.PdfGenerator;
 
 import javax.swing.*;
+import java.io.File;
 
 /**
  *
@@ -86,6 +88,11 @@ public class AdminDashboard extends javax.swing.JFrame {
                 });
 
                 generate_report_btn.setText("Generate Report");
+                generate_report_btn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                generate_report_btnActionPerformed(evt);
+                        }
+                });
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -164,6 +171,23 @@ public class AdminDashboard extends javax.swing.JFrame {
         customerList.setVisible(true);
         dispose();
         }//GEN-LAST:event_booking_historty_btnActionPerformed
+
+        private void generate_report_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_report_btnActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify file to save");
+
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION){
+            File fileToSave = fileChooser.getSelectedFile();
+            try {
+                PdfGenerator pdfGenerator = new PdfGenerator(context.getUserRepository(), context.getCarRepository(), context.getBookingRepository());
+                pdfGenerator.generatePdf(fileToSave.getAbsolutePath());
+            } catch (Exception e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null ,"Something went wrong");
+            }
+        }
+        }//GEN-LAST:event_generate_report_btnActionPerformed
 
 	/**
 	 * @param args the command line arguments

@@ -213,10 +213,10 @@ public class CustomerBooking extends javax.swing.JFrame {
         }
 
         if (!this.context.getBookingRepository().startBooking(this.booking)) {
-            this.context.getCarRepository().changeCarStockStatus(booking.getRelatedToCar(), false);
             JOptionPane.showMessageDialog(null, "Something went wrong");
             return;
         }
+        this.context.getCarRepository().changeCarStockStatus(booking.getRelatedToCar(), false);
         JOptionPane.showMessageDialog(null, "Have a nice ride!");
         CustomerDashboard customerDashboard = new CustomerDashboard();
         customerDashboard.setContext(context);
@@ -252,7 +252,7 @@ public class CustomerBooking extends javax.swing.JFrame {
 
 
 
-        JOptionPane.showMessageDialog(null, "Have a nice ride!");
+        JOptionPane.showMessageDialog(null, "Thank you for choosing us!");
         CustomerDashboard customerDashboard = new CustomerDashboard();
         customerDashboard.setContext(context);
         customerDashboard.setCustomer(customer);

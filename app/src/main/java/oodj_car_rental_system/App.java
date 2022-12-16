@@ -26,15 +26,18 @@ public class App {
         CarRepository carRepository = new CarRepository(textFileORM.getTableWriter(), textFileORM.getTableReader(), textFileORM.getTableRecordDeleter());
         BookingRepository bookingRepository = new BookingRepository(textFileORM.getTableWriter(), textFileORM.getTableReader(), textFileORM.getTableRecordDeleter());
         ApplicationContext context = new ApplicationContext(userRepository, carRepository, bookingRepository);
+        try {
+            userRepository.checkIfAdminPresent();
+        } catch (Exception e){
+            userRepository.addAdmin();
+        }
         LoginPage startUp = new LoginPage();
-
-//        PdfGenerator pdfGenerator = new PdfGenerator(textFileORM.getTableWriter(),textFileORM.getTableReader());
-//        pdfGenerator.generatePdf("report.pdf");
         startUp.setContext(context);
         startUp.setVisible(true);
 
 
 
     }
+
 
 }

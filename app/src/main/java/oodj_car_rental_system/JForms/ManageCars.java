@@ -196,6 +196,9 @@ public class ManageCars extends javax.swing.JFrame {
             throw new Exception("Something went wrong");
         }
 
+        if (!car.isInStock()){
+            throw new Exception("You cant edit car while in renting!");
+        }
 
         EditCarDashboard editCarDashboard  = new EditCarDashboard();
         editCarDashboard.setCar(car);

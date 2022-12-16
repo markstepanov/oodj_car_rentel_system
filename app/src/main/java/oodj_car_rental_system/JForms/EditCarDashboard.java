@@ -233,6 +233,10 @@ public class EditCarDashboard extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Something went wrong");
             }
 
+            if (!newCarInfo.isInStock()){
+                JOptionPane.showMessageDialog(null, "You can't edit the Car While it's in Rent!");
+            }
+
 //
             JOptionPane.showMessageDialog(null, "Car information changed");
             ManageCars manageCars = new ManageCars();
@@ -264,22 +268,6 @@ public class EditCarDashboard extends javax.swing.JFrame {
         return  true;
     }
     private void add_car_btnActionPerformed(java.awt.event.ActionEvent evt) {
-
-//        try {
-//            carToAdd = getCarInformation();
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e.getMessage());
-//            return;
-//        }
-//
-//        try{
-//            this.context.getCarRepository().addNewCar(carToAdd.getFist(), carToAdd.getSecond());
-//        } catch (Exception e){
-//            JOptionPane.showMessageDialog(null, "Something Went Wrong , Please try again");
-//        }
-//
-//        JOptionPane.showMessageDialog(null, "Car " + carToAdd.getFist().getName() + " successfully added");
-
         ManageCars manageCars = new ManageCars();
         manageCars.setContext(context);
         manageCars.setVisible(true);

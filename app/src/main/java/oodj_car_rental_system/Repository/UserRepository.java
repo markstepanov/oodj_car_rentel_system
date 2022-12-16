@@ -19,6 +19,24 @@ public class UserRepository {
     private TableReader tableReader;
     private TableRecordDeleter tableRecordDeleter;
 
+
+    public void checkIfAdminPresent() throws Exception{
+
+            UserDAO admin = (UserDAO) tableReader.readById(new UserDAO(),0);
+            if (!(admin.username == "admin") && !admin.isAdmin){
+                throw  new Exception();
+            }
+
+    }
+
+    public void addAdmin (){
+        try {
+            tableWriter.writeNew(new UserDAO("admin", "admin", true));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public UserRepository(TableWriter tableWriter, TableReader tableReader, TableRecordDeleter tableRecordDeleter) {
         this.tableWriter = tableWriter;
         this.tableReader = tableReader;
